@@ -18,7 +18,6 @@ namespace Autobarn.AuditLog {
                     var amqp = hostContext.Configuration.GetConnectionString("RabbitMQ");
                     var bus = RabbitHutch.CreateBus(amqp);
                     services.AddSingleton(bus);
-                    
                     services.AddHostedService<AuditLogService>();
                 })
                 .Build();
@@ -36,7 +35,7 @@ namespace Autobarn.AuditLog {
         }
         public async Task StartAsync(CancellationToken cancellationToken) {
             logger.LogInformation($"Starting AuditLogService...");
-            await bus.PubSub.SubscribeAsync<NewVehicleMessage>("Autobarn.AuditLog", HandleNewVehicleMessage);
+            await bus.PubSub.SubscribeAsync<NewVehicleMessage>($"Autobarn.AuditLog_{Environment.MachineName}", HandleNewVehicleMessage);
         }
 
         private void HandleNewVehicleMessage(NewVehicleMessage m) {
