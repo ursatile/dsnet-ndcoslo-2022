@@ -6,6 +6,24 @@ using System.Linq;
 using Autobarn.Data.Entities;
 
 public static class Hypermedia {
+    public static dynamic ToResource(this Model model) {
+        var result = model.ToDynamic();
+        result._links = new {
+            self = new {
+                href = $"/api/models/{model.Code}",
+            },
+        };
+        result._actions = new {
+            create = new {
+                type = "application/json",
+                method = "POST",
+                name = "Create a new vehicle",
+                href = $"/api/models/{model.Code}"
+            }
+        };
+        return result;
+    }
+
     public static dynamic ToResource(this Vehicle vehicle) {
         var result = vehicle.ToDynamic();
         result._links = new {

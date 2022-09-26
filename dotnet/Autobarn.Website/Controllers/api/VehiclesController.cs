@@ -12,6 +12,25 @@ using ILogger = Castle.Core.Logging.ILogger;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Autobarn.Website.Controllers.api {
+    [Route("api")]
+    [ApiController]
+    public class DefaultController : ControllerBase {
+        [HttpGet]
+        public IActionResult Get() {
+            return Ok(new {
+                message = "Welcome to the Autobarn API",
+                _links = new {
+                    vehicles = new {
+                        href = "/api/vehicles"
+                    },
+                    models = new {
+                        href = "/api/models"
+                    }
+                }
+            });
+        }
+    }
+
     [Route("api/[controller]")]
     [ApiController]
     public class VehiclesController : ControllerBase {
@@ -48,20 +67,6 @@ namespace Autobarn.Website.Controllers.api {
             if (vehicle == default) return NotFound();
             var result = vehicle.ToResource();
             return Ok(result);
-        }
-
-        // POST api/vehicles
-        [HttpPost]
-        public IActionResult Post([FromBody] VehicleDto dto) {
-            var vehicleModel = db.FindModel(dto.ModelCode);
-            var vehicle = new Vehicle {
-                Registration = dto.Registration,
-                Color = dto.Color,
-                Year = dto.Year,
-                VehicleModel = vehicleModel
-            };
-            db.CreateVehicle(vehicle);
-            return Ok(dto);
         }
 
         // PUT api/vehicles/ABC123
