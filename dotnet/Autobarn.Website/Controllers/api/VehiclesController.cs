@@ -1,4 +1,4 @@
-﻿using Autobarn.Data;
+using Autobarn.Data;
 using Autobarn.Data.Entities;
 using Autobarn.Website.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using ILogger = Castle.Core.Logging.ILogger;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,15 +16,18 @@ namespace Autobarn.Website.Controllers.api {
     [ApiController]
     public class VehiclesController : ControllerBase {
         private readonly IAutobarnDatabase db;
+        private readonly ILogger<VehiclesController> logger;
 
-        public VehiclesController(IAutobarnDatabase db) {
+        public VehiclesController(IAutobarnDatabase db, ILogger<VehiclesController> logger) {
             this.db = db;
+            this.logger = logger;
         }
 
         const int PAGE_SIZE = 10;
         // GET: api/vehicles
         [HttpGet]
         public IActionResult Get(int index = 0) {
+            logger.LogDebug($"GET index={index}");
             var vehicles = db.ListVehicles().Skip(index).Take(PAGE_SIZE);
             var total = db.CountVehicles();
             var _links = Hypermedia.Paginate("/api/vehicles", index, PAGE_SIZE, total);
