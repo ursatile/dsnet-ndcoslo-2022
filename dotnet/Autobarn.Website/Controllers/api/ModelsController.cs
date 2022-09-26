@@ -1,17 +1,22 @@
+using System;
 using Autobarn.Data;
 using Autobarn.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Autobarn.Messages;
 using Autobarn.Website.Models;
+using EasyNetQ;
 
 namespace Autobarn.Website.Controllers.api {
     [Route("api/[controller]")]
     [ApiController]
     public class ModelsController : ControllerBase {
         private readonly IAutobarnDatabase db;
+        private readonly IBus bus;
 
-        public ModelsController(IAutobarnDatabase db) {
+        public ModelsController(IAutobarnDatabase db, IBus bus) {
             this.db = db;
+            this.bus = bus;
         }
 
         [HttpGet]
@@ -38,7 +43,20 @@ namespace Autobarn.Website.Controllers.api {
                 VehicleModel = vehicleModel
             };
             db.CreateVehicle(vehicle);
+            PublishVehicleMessage(vehicle);
             return Created($"/api/vehicles/{vehicle.Registration}", vehicle.ToResource());
+        }
+
+        private void PublishVehicleMessage(Vehicle vehicle) {
+            var message = new NewVehicleMessage {
+                Registration = vehicle.Registration,
+                Color = vehicle.Color,
+                Year = vehicle.Year,
+                ManufacturerName = vehicle?.VehicleModel?.Manufacturer?.Name ?? "unknown",
+                ModelName = vehicle?.VehicleModel?.Name ?? "unknown",
+                ListedAt = DateTimeOffset.UtcNow
+            };
+            bus.PubSub.Publish(message);
         }
     }
 }
