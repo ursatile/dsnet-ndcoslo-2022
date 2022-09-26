@@ -25,23 +25,13 @@ namespace Autobarn.Website.Controllers.api {
         public IActionResult Get(int index = 0) {
             var vehicles = db.ListVehicles().Skip(index).Take(PAGE_SIZE);
             var total = db.CountVehicles();
-            dynamic _links = new ExpandoObject();
-            _links.self = new {
-                href = $"/api/vehicles?index={index}"
-            };
-            if (index > 0) {
-                _links.previous = new {
-                    href = $"/api/vehicles?index={index - PAGE_SIZE}"
-                };
-            }
-            if (index + PAGE_SIZE < total) {
-                _links.next = new {
-                    href = $"/api/vehicles?index={index + PAGE_SIZE}"
-                };
-            }
+            var _links = Hypermedia.Paginate("/api/vehicles", index, PAGE_SIZE, total);
             return Ok(new {
 				_links,
-				vehicles
+				index,
+				count = PAGE_SIZE,
+				total,
+				vehicles,
 			});
     }
 
