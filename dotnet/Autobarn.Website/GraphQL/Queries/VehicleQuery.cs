@@ -35,8 +35,12 @@ namespace Autobarn.Website.GraphQL.Queries {
 
         private object GetVehiclesByColor(IResolveFieldContext<object> context) {
             var color = context.GetArgument<string>("color");
+            if (color.Equals("blurple", StringComparison.InvariantCultureIgnoreCase)) {
+                context.Errors.Add(new ExecutionError("You are not allowed to ask for blurple cars."));
+            }
             return db.ListVehicles().Where(v => v.Color.Contains(color, StringComparison.InvariantCultureIgnoreCase));
         }
+
 
         private QueryArgument MakeNonNullStringArgument(string name, string description) {
             return new QueryArgument<NonNullGraphType<StringGraphType>> {
