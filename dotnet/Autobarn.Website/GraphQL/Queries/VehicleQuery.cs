@@ -9,6 +9,28 @@ using GraphQL;
 using GraphQL.Types;
 
 namespace Autobarn.Website.GraphQL.Queries {
+
+    //public class YearFilter {
+    //    public int Year { get; set; }
+    //    public string Op { get; set; }
+
+    //    public bool Matches(Vehicle v) {
+    //        return Op switch {
+    //            ">" => v.Year > Year,
+    //            "<" => v.Year < Year,
+    //            "=" => v.Year == Year,
+    //            _ => true
+    //        };
+    //    }
+    //}
+
+    //public sealed class YearFilterGraphType : IInputObjectGraphType {
+    //    public YearFilterGraphType() {
+    //        Field(f => f.Year);
+    //        Field(f => f.Op);
+    //    }
+    //}
+
     public sealed class VehicleQuery : ObjectGraphType {
 
         private readonly IAutobarnDatabase db;
