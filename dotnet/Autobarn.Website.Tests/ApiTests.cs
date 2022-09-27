@@ -1,4 +1,4 @@
-﻿using Autobarn.Data.Entities;
+using Autobarn.Data.Entities;
 using Newtonsoft.Json;
 using Shouldly;
 using System;
@@ -24,32 +24,32 @@ namespace Autobarn.Website.Tests {
 			Assert.True(response.IsSuccessStatusCode);
 		}
 
-		[Fact]
-		public async void GET_vehicles_returns_vehicle_data() {
-			var client = factory.CreateClient();
-			var response = await client.GetAsync("/api/vehicles");
-			var json = await response.Content.ReadAsStringAsync();
-			var vehicles = JsonConvert.DeserializeObject<List<Vehicle>>(json);
-			vehicles.Count.ShouldBeGreaterThan(0);
-		}
+		//[Fact]
+		//public async void GET_vehicles_returns_vehicle_data() {
+		//	var client = factory.CreateClient();
+		//	var response = await client.GetAsync("/api/vehicles");
+		//	var json = await response.Content.ReadAsStringAsync();
+		//	var vehicles = JsonConvert.DeserializeObject<List<Vehicle>>(json);
+		//	vehicles.Count.ShouldBeGreaterThan(0);
+		//}
 
-		[Fact]
-		public async void POST_creates_vehicle() {
-			var registration = Guid.NewGuid().ToString("N");
-			var client = factory.CreateClient();
-			var vehicle = new {
-				modelCode = "volkswagen-beetle",
-				registration,
-				color = "Green",
-				year = "1985"
-			};
-			var content = new StringContent(JsonConvert.SerializeObject(vehicle), Encoding.UTF8, "application/json");
-			var response = await client.PostAsync($"/api/vehicles", content);
-			response.StatusCode.ShouldBe(HttpStatusCode.OK);
-			var (_, result) = await client.GetVehicle(registration);
-			result.Color.ShouldBe("Green");
-			await client.DeleteAsync($"/api/vehicles/{registration}");
-		}
+		//[Fact]
+		//public async void POST_creates_vehicle() {
+		//	var registration = Guid.NewGuid().ToString("N");
+		//	var client = factory.CreateClient();
+		//	var vehicle = new {
+		//		modelCode = "volkswagen-beetle",
+		//		registration,
+		//		color = "Green",
+		//		year = "1985"
+		//	};
+		//	var content = new StringContent(JsonConvert.SerializeObject(vehicle), Encoding.UTF8, "application/json");
+		//	var response = await client.PostAsync($"/api/vehicles", content);
+		//	response.StatusCode.ShouldBe(HttpStatusCode.OK);
+		//	var (_, result) = await client.GetVehicle(registration);
+		//	result.Color.ShouldBe("Green");
+		//	await client.DeleteAsync($"/api/vehicles/{registration}");
+		//}
 
 
 		[Fact]

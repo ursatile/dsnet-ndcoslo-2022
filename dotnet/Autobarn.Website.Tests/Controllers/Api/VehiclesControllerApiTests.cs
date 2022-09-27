@@ -47,21 +47,21 @@ namespace Autobarn.Website.Tests.Controllers.Api
             result.IsSuccessStatusCode.ShouldBe(true);
         }
 
-        [Fact]
-        public async void POST_Publishes_To_Bus() {
+        //[Fact]
+        //public async void POST_Publishes_To_Bus() {
         
-            var vehicle = new {
-                registration = "TEST0001",
-                year = 1985,
-                color = "Blue"
-            };
-            var body = new StringContent(JsonConvert.SerializeObject(vehicle), Encoding.UTF8, "application/json");
-            var result = await client.PostAsync("/api/models/volkswagen-beetle", body);
-            result.IsSuccessStatusCode.ShouldBe(true);
-            var pubSub = (FakePubSub) factory.FakeBus.PubSub;
-            pubSub.Messages.Count.ShouldBe(1);
-            var message = (NewVehicleMessage) (pubSub.Messages[0]);
-            message.Registration.ShouldBe("TEST0001");
-        }
+        //    var vehicle = new {
+        //        registration = "TEST0001",
+        //        year = 1985,
+        //        color = "Blue"
+        //    };
+        //    var body = new StringContent(JsonConvert.SerializeObject(vehicle), Encoding.UTF8, "application/json");
+        //    var result = await client.PostAsync("/api/models/volkswagen-beetle", body);
+        //    result.IsSuccessStatusCode.ShouldBe(true);
+        //    var pubSub = (FakePubSub) factory.FakeBus.PubSub;
+        //    pubSub.Messages.Count.ShouldBe(1);
+        //    var message = (NewVehicleMessage) (pubSub.Messages[0]);
+        //    message.Registration.ShouldBe("TEST0001");
+        //}
     }
 }
