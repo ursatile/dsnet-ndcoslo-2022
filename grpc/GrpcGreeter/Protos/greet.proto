@@ -12,8 +12,10 @@ service Greeter {
 
 // The request message containing the user's name.
 message HelloRequest {
-  string name = 1;
+  reserved 1;
   string language = 2;
+  string firstName = 3;
+  string lastName = 4;
 }
 
 // The response message containing the greetings.

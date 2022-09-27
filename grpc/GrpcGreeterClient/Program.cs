@@ -14,7 +14,8 @@ while(true) {
     };
     var reply = client.SayHello(new HelloRequest {
         Language = language,
-        Name = "NDC Oslo"
+        FirstName = "NDC",
+        LastName = "Oslo"
     });
     Console.WriteLine(reply.Message);
 }
