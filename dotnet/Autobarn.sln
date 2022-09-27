@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.6.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.Website", "Autobarn.Website\Autobarn.Website.csproj", "{BA806410-F779-461A-B4F1-D97D7289FB5B}"
 EndProject
@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.Data", "Autobarn.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.Website.Tests", "Autobarn.Website.Tests\Autobarn.Website.Tests.csproj", "{39C4F7B7-43D1-493F-97EE-E7C57D6C7F07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobarn.AuditLog", "Autobarn.AuditLog\Autobarn.AuditLog.csproj", "{CB8531C6-7564-4859-88B2-A453F7F83DFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.AuditLog", "Autobarn.AuditLog\Autobarn.AuditLog.csproj", "{CB8531C6-7564-4859-88B2-A453F7F83DFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobarn.Messages", "Autobarn.Messages\Autobarn.Messages.csproj", "{89DC772A-CC07-411D-8D07-8C0C435390E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.Messages", "Autobarn.Messages\Autobarn.Messages.csproj", "{89DC772A-CC07-411D-8D07-8C0C435390E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.PricingClient", "Autobarn.PricingClient\Autobarn.PricingClient.csproj", "{A68A1B46-962C-4D35-BEAD-D94B0291EB25}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Autobarn.PricingServer", "Autobarn.PricingServer\Autobarn.PricingServer.csproj", "{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +87,30 @@ Global
 		{89DC772A-CC07-411D-8D07-8C0C435390E4}.Release|x64.Build.0 = Release|Any CPU
 		{89DC772A-CC07-411D-8D07-8C0C435390E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{89DC772A-CC07-411D-8D07-8C0C435390E4}.Release|x86.Build.0 = Release|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Debug|x64.Build.0 = Debug|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Debug|x86.Build.0 = Debug|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Release|x64.ActiveCfg = Release|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Release|x64.Build.0 = Release|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Release|x86.ActiveCfg = Release|Any CPU
+		{A68A1B46-962C-4D35-BEAD-D94B0291EB25}.Release|x86.Build.0 = Release|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Debug|x86.Build.0 = Debug|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Release|x64.Build.0 = Release|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Release|x86.ActiveCfg = Release|Any CPU
+		{1A62A8B6-88E0-4FB3-93BE-D25FBA82B8FE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
