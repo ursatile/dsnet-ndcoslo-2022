@@ -21,12 +21,20 @@ namespace Autobarn.PricingClient {
 
         public async Task StartAsync(CancellationToken cancellationToken) {
             logger.LogInformation($"Starting PricingClientService...");
-            await bus.PubSub.SubscribeAsync<NewVehicleMessage>($"Autobarn.AuditLog_{Environment.MachineName}", HandleNewVehicleMessage);
+            await bus.PubSub.SubscribeAsync<NewVehicleMessage>($"Autobarn.PricingClient", HandleNewVehicleMessage);
         }
 
-        private void HandleNewVehicleMessage(NewVehicleMessage m) {
+        private async Task HandleNewVehicleMessage(NewVehicleMessage m) {
             logger.LogInformation("Received NewVehicleMessage");
             logger.LogInformation(m.ToString());
+            var pr = new PriceRequest {
+                Year = m.Year,
+                Model = m.ModelName,
+                Color = m.Color,
+                Manufacturer = m.ManufacturerName
+            };
+            var priceReply = await grpcClient.GetPriceAsync(pr);
+            logger.LogInformation($"Got a price: {priceReply.Price} {priceReply.CurrencyCode}");
         }
 
         public Task StopAsync(CancellationToken cancellationToken) {

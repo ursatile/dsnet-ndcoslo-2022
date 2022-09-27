@@ -12,9 +12,10 @@ namespace Autobarn.PricingClient {
         static async Task Main(string[] args) {
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) => {
-                    var channel = GrpcChannel.ForAddress(hostContext.Configuration["PricingServerUrl"]);
-                    var client = new Pricer.PricerClient(channel);
-                    services.AddSingleton(client);
+                    var url = hostContext.Configuration["PricingServerUrl"];
+                    var channel = GrpcChannel.ForAddress(url);
+                    var grpc = new Pricer.PricerClient(channel);
+                    services.AddSingleton(grpc);
                     var amqp = hostContext.Configuration.GetConnectionString("RabbitMQ");
                     var bus = RabbitHutch.CreateBus(amqp);
                     services.AddSingleton(bus);
