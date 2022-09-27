@@ -35,6 +35,9 @@ namespace Autobarn.PricingClient {
             };
             var priceReply = await grpcClient.GetPriceAsync(pr);
             logger.LogInformation($"Got a price: {priceReply.Price} {priceReply.CurrencyCode}");
+            var nvpm = m.WithPrice(priceReply.Price, priceReply.CurrencyCode);
+            await bus.PubSub.PublishAsync(nvpm);
+            logger.LogInformation($"Published a NewVehiclePriceMessage: {nvpm}");
         }
 
         public Task StopAsync(CancellationToken cancellationToken) {
