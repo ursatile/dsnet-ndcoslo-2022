@@ -1,4 +1,4 @@
-﻿using Autobarn.Data;
+using Autobarn.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -9,7 +9,7 @@ namespace Autobarn.Website.Controllers {
 		public ManufacturersController(IAutobarnDatabase db) {
 			this.db = db;
 		}
-		public IActionResult Index() {
+        public IActionResult Index() {
 			var vehicles = db.ListManufacturers();
 			return View(vehicles);
 		}

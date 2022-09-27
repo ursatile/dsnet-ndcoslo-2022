@@ -7,7 +7,6 @@ bus.PubSub.Subscribe<Greeting>("dylan_beattie", Handle);
 Console.WriteLine("Listening for messages...");
 Console.ReadKey(false);
 
-
 void Handle(Greeting greeting) {
     if (greeting.Number % 5 == 0) {
         throw new Exception("Something weird happened!");

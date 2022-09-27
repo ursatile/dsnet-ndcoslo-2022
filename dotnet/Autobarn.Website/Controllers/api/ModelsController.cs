@@ -20,8 +20,8 @@ namespace Autobarn.Website.Controllers.api {
         }
 
         [HttpGet]
-        public IEnumerable<Model> Get() {
-            return db.ListModels();
+        public IActionResult Get() {
+            return Ok(db.ListModels());
         }
 
         [HttpGet("{id}")]
@@ -36,14 +36,18 @@ namespace Autobarn.Website.Controllers.api {
         public IActionResult Post(string id, [FromBody] VehicleDto dto) {
             var vehicleModel = db.FindModel(id);
             if (vehicleModel == null) return NotFound($"There is no vehicle model matching '{id}'");
+
+            var existing = db.FindVehicle(dto.Registration);
+            if (existing != null)
+                return Conflict($"Sorry - the vehicle with registration {dto.Registration} is already listed for sale on our platform.");
             var vehicle = new Vehicle {
                 Registration = dto.Registration,
                 Color = dto.Color,
                 Year = dto.Year,
                 VehicleModel = vehicleModel
             };
-            db.CreateVehicle(vehicle);
             PublishVehicleMessage(vehicle);
+            db.CreateVehicle(vehicle);
             return Created($"/api/vehicles/{vehicle.Registration}", vehicle.ToResource());
         }
 

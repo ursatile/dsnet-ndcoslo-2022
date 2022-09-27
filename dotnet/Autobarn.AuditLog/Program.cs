@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 using Autobarn.Messages;
@@ -33,6 +32,7 @@ namespace Autobarn.AuditLog {
             this.logger = logger;
             this.bus = bus;
         }
+
         public async Task StartAsync(CancellationToken cancellationToken) {
             logger.LogInformation($"Starting AuditLogService...");
             await bus.PubSub.SubscribeAsync<NewVehicleMessage>($"Autobarn.AuditLog_{Environment.MachineName}", HandleNewVehicleMessage);
