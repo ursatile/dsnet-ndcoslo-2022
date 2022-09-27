@@ -15,22 +15,24 @@
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Autobarn</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Manufacturers"
-                                asp-action="Index">Makes</a>
+                               asp-action="Index">Makes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Models"
-                                asp-action="Index">Models</a>
+                               asp-action="Index">Models</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">All
-                                Cars</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">
+                                All
+                                Cars
+                            </a>
                         </li>
                         <!--
                         <li class="nav-item align-right">
@@ -45,6 +47,7 @@
             </div>
         </nav>
     </header>
+    <div id="signalr-notifications"></div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -53,8 +56,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            This is a sample app for <a href="https://dylanbeattie.net/">Dylan Beattie's</a> workshop <a
-                href="https://urs.tl/dsnet">Distributed Systems with .NET</a>
+            This is a sample app for <a href="https://dylanbeattie.net/">Dylan Beattie's</a> workshop <a href="https://urs.tl/dsnet">Distributed Systems with .NET</a>
 
         </div>
     </footer>

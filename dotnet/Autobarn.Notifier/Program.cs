@@ -12,6 +12,7 @@ namespace Autobarn.Notifier {
                 .ConfigureServices((hostContext, services) => {
                     var hub = new HubConnectionBuilder()
                         .WithUrl(hostContext.Configuration["SignalRHubUrl"])
+                        .WithAutomaticReconnect()
                         .Build();
                     services.AddSingleton(hub);
                     var amqp = hostContext.Configuration.GetConnectionString("RabbitMQ");

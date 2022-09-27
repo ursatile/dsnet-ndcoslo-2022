@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Autobarn.Messages;
@@ -30,13 +31,18 @@ namespace Autobarn.Notifier {
         private async Task HandleNewVehiclePriceMessage(NewVehiclePriceMessage m) {
             logger.LogInformation("Received NewVehiclePriceMessage");
             var json = JsonConvert.SerializeObject(m);
-            await hub.SendAsync("AnythingWeLikeInHere", user, json);
-            logger.LogInformation(m.ToString());
+            try {
+                await hub.SendAsync("AnythingWeLikeInHere", user, json);
+                logger.LogInformation(m.ToString());
+            } catch (Exception ex) {
+                logger.LogError(ex, "Couldn't talk to SignalR hub");
+                throw;
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken) {
-            logger.LogInformation($"Stopping NotifierService...");
-            return Task.CompletedTask;
+                logger.LogInformation($"Stopping NotifierService...");
+                return Task.CompletedTask;
+            }
         }
     }
-}
